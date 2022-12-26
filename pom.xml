@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.rewin</groupId>
+    <artifactId>ubsi-service-gateway</artifactId>
+    <version>1.0.1</version>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <java.version>1.8</java.version>
+        <ubsi.version>2.3.2</ubsi.version>
+    </properties>
+
+    <name>rewin.service.ubsi.gateway</name>
+    <description>微服务：UBSI网关（社区版）</description>
+
+    <!--
+微服务：UBSI网关（社区版）
+===
+版本更新说明：
+```
+```
+    -->
+
+    <dependencies>
+        <dependency>
+            <groupId>com.rewin</groupId>
+            <artifactId>ubsi-core-ce</artifactId>
+            <version>${ubsi.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>utf-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M7</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.rewin</groupId>
+                <artifactId>ubsi-maven-plugin</artifactId>
+                <version>1.1.0</version>
+                <configuration>     <!-- 插件的配置参数 -->
+                    <services>      <!-- 本项目包含的微服务 -->
+                        <service>
+                            <name>rewin.ubsi.gateway</name>	<!-- 服务名字 -->
+                            <className>rewin.service.ubsi.gateway.Service</className>	<!-- 服务类名 -->
+                            <configJson>    <!-- 微服务的配置参数，JSON格式的字符串 -->
+                                <![CDATA[
+                                {
+                                  "mongo_servers": [
+                                    {
+                                      "host": "mongo.host",
+                                      "port": 27017
+                                    }
+                                  ]
+                                }
+                            ]]>
+                            </configJson>
+                        </service>
+                    </services>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>github packages</name>
+            <url>https://maven.pkg.github.com/open-ubsi/release</url>
+        </repository>
+    </distributionManagement>
+
+</project>

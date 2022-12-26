@@ -1,0 +1,8 @@
+{
+  "services": {
+    "rewin.ubsi.gateway": {
+      "class_name": "rewin.service.ubsi.gateway.Service",
+      "startup": true
+    }
+  }
+}
